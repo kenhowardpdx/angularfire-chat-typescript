@@ -12,5 +12,5 @@ module app.controllers
         constructor (private $rootScope : ng.IRootScopeService, private $location: ng.ILocationService, private auth : AngularFireAuth ) {
         }
     }
-    app.registerController('LoginCtrl', ['$rootScope', '$location', 'AuthFactory']);
+    app.registerController('LoginCtrl', ['$rootScope', '$location', 'authFactory']);
 }

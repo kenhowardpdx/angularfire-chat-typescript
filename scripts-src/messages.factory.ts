@@ -11,5 +11,5 @@ module app.services
             this.$firebaseArray(DB);
         }
     }
-    app.registerService('MessagesFactory', ['FirebaseService', '$firebaseAuth']);
+    app.registerService('MessagesFactory', ['firebaseService', '$firebaseAuth']);
 }

@@ -7,5 +7,5 @@ module app.services
             this.$firebaseAuth(DB);
         }
     }
-    app.registerService('AuthFactory', ['FirebaseService', '$firebaseAuth']);
+    app.registerService('AuthFactory', ['firebaseService', '$firebaseAuth']);
 }

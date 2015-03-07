@@ -20,5 +20,5 @@ module app.controllers
             }
         }
     }
-    app.registerController('MessagesCtrl', ['MessagesFactory']);
+    app.registerController('MessagesCtrl', ['messagesFactory']);
 }

@@ -6,5 +6,5 @@ module app.services
             return new Firebase('https://crackling-fire-4047.firebaseio.com');
         }
     }
-    app.registerService('FirebaseService');
+    app.registerService('firebaseService');
 }
