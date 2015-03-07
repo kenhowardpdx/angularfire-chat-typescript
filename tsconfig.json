@@ -1,0 +1,31 @@
+{
+    "version": "1.4.1",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "outDir": "./scripts"
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./scripts-src/app.ts",
+        "./scripts-src/auth.factory.ts",
+        "./scripts-src/firebase.service.ts",
+        "./scripts-src/login.controller.ts",
+        "./scripts-src/messages.controller.ts",
+        "./scripts-src/messages.factory.ts",
+        "./typings/angularfire/angularfire.d.ts",
+        "./typings/angularjs/angular-animate.d.ts",
+        "./typings/angularjs/angular-route.d.ts",
+        "./typings/angularjs/angular.d.ts",
+        "./typings/firebase/firebase.d.ts",
+        "./typings/jquery/jquery.d.ts",
+        "./typings/tsd.d.ts"
+    ]
+}

@@ -1,0 +1,27 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "angularjs/angular.d.ts": {
+      "commit": "fa20411dd52348e933c2b23b24365236e92fa4ac"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "fa20411dd52348e933c2b23b24365236e92fa4ac"
+    },
+    "angularfire/angularfire.d.ts": {
+      "commit": "fa20411dd52348e933c2b23b24365236e92fa4ac"
+    },
+    "firebase/firebase.d.ts": {
+      "commit": "fa20411dd52348e933c2b23b24365236e92fa4ac"
+    },
+    "angularjs/angular-route.d.ts": {
+      "commit": "fa20411dd52348e933c2b23b24365236e92fa4ac"
+    },
+    "angularjs/angular-animate.d.ts": {
+      "commit": "fa20411dd52348e933c2b23b24365236e92fa4ac"
+    }
+  }
+}
