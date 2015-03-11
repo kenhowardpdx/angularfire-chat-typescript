@@ -1,15 +1,11 @@
 module app.services
 {
-    export class MessagesFactory
+    export function MessagesFactory (DB: Firebase, $firebaseArray: AngularFireArrayService)
     {
-        static $inject = [
-            'app.services.FirebaseService',
-            '$firebaseAuth'
-        ];
-        constructor (private DB : Firebase, public $firebaseArray : AngularFireArrayService)
-        {
-            this.$firebaseArray(DB);
-        }
+        return $firebaseArray(DB.child('messages'));
     }
-    app.registerService('MessagesFactory', ['firebaseService', '$firebaseAuth']);
+
+    MessagesFactory.$inject = ['firebaseFactory', '$firebaseArray'];
+
+    angular.module('app.services').factory('messagesFactory', MessagesFactory);
 }

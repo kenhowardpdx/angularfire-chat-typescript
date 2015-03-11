@@ -3,22 +3,21 @@ module app.controllers
 
     export class MessagesCtrl
     {
-        name: string;
         message: string;
 
-        constructor (private messages: any)
+        public saveMessage = (message: string) : void =>
         {
-            this.name = '';
-            this.message = '';
-        }
-
-        public saveMessage (name: string, message: string) : void
-        {
-            if (name && message) {
-                this.messages.$add({ name: name, message: message });
+            if (message) {
+                this.messages.$add({ userid: this.user.loggedUser.uid, message: message });
                 this.message = null;
             }
         }
+
+        constructor (private messages: any, private user)
+        {
+        }
+
+        public static $inject = ['messagesFactory', 'userService'];
     }
-    app.registerController('MessagesCtrl', ['messagesFactory']);
+    angular.module('app.controllers').controller('messagesCtrl', MessagesCtrl);
 }

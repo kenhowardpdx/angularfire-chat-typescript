@@ -1,9 +1,7 @@
 <h1>Login</h1>
-<div ng-show="vm.auth()">
-  <p>Hello, {{ authData.facebook.displayName }}</p>
-  <button ng-click="vm.auth.$unauth()">Logout</button>
-</div>
-<div ng-hide="vm.auth()">
-  <p>Welcome, please log in.</p>
-  <button ng-click="vm.login()">Login</button>
+<div>
+    <p>Welcome, please log in.</p>
+    <md-button class="md-raised md-primary icon-button" ng-click="vm.login()">
+        <md-icon md-svg-icon="ic_account_box_24px"></md-icon> Login with Twitter
+    </md-button>
 </div>

@@ -1,11 +1,13 @@
 module app.services
 {
-    export class AuthFactory implements IService
+    export function AuthFactory (DB: Firebase, $firebaseAuth : AngularFireAuthService)
     {
-        constructor (private DB : Firebase, public $firebaseAuth : AngularFireAuthService)
-        {
-            this.$firebaseAuth(DB);
+        return function () {
+            return $firebaseAuth(DB);
         }
     }
-    app.registerService('AuthFactory', ['firebaseService', '$firebaseAuth']);
+
+    AuthFactory.$inject = ['firebaseFactory', '$firebaseAuth'];
+
+    angular.module('app.services').factory('authFactory', AuthFactory);
 }

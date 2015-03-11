@@ -5,36 +5,53 @@ var modules = ['app.controllers', 'app.directives', 'app.filters', 'app.services
 modules.forEach((module) => angular.module(module, []));
 
 modules.push('ngRoute');
+modules.push('ngMaterial');
 modules.push('firebase');
 
 angular.module('app', modules);
 
-angular.module('app').config(['$routeProvider', function routes ($routeProvider: ng.route.IRouteProvider) {
+angular.module('app').config(['$routeProvider', '$mdIconProvider', function routes ($routeProvider: ng.route.IRouteProvider, $mdIconProvider: any) {
     $routeProvider
         .when('/', {
-            template: '<h1>Home</h1>'
+            controller: 'messagesCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'messages.html',
+            authRequired: true,
+            pageTitle: 'Chat'
         })
         .when('/login', {
-            controller: 'app.controllers.LoginCtrl',
+            controller: 'loginCtrl',
             controllerAs: 'vm',
             templateUrl: 'login.html'
         })
-        .when('/messages', {
-            controller: 'app.controllers.MessagesCtrl',
-            controllerAs: 'vm',
-            templateUrl: 'messages.html',
-            resolve: {
-                'currentAuth': ['Auth', function (auth: AngularFireAuth) {
-                    return auth.$waitForAuth();
-                }]
-            }
+        .when('/logout', {
+            controller: 'logoutCtrl',
+            template: ''
         })
         .otherwise('/');
+
+        $mdIconProvider.defaultIconSet('assets/svg/svg-sprite-action.svg', 128)
+            .iconSet('nav', 'assets/svg/svg-sprite-navigation.svg', 128);
 }]);
 
-angular.module('app').run(['$rootScope', '$location', function ($rootScope : ng.IRootScopeService, $location : ng.ILocationService) {
-    $rootScope.$on('$routeChangeError', function (event: ng.IAngularEvent, next, previous, error: string) {
-        $location.path('/login');
+angular.module('app').run(['$rootScope', '$location', 'authFactory', 'userService', function ($rootScope : ng.IRootScopeService, $location : ng.ILocationService, auth, user) {
+    var profile = auth().$getAuth();
+    if (profile) {
+        user.set(profile);
+    }
+
+    $rootScope.$on('$routeChangeStart', function (event: ng.IAngularEvent, next: ng.route.ICurrentRoute, current: ng.route.ICurrentRoute) {
+        if (next['authRequired']) {
+            auth().$waitForAuth().then(function () {
+                if (!auth().$getAuth()) {
+                    $location.path('/login');
+                }
+            });
+        }
+    });
+
+    $rootScope.$on('$routeChangeSuccess', function (event: ng.IAngularEvent, current: ng.route.ICurrentRoute, previous: ng.route.ICurrentRoute) {
+        $rootScope['pageTitle'] = current['pageTitle'];
     });
 }]);
 
@@ -53,53 +70,4 @@ module app {
         filter (input: any, ...args: any[]): any;
     }
     export interface IService {}
-
-    /**
-     * Register new controller.
-     *
-     * @param className
-     * @param services
-     */
-    export function registerController (className: string, services = []) {
-        var controller = 'app.controllers.' + className;
-        services.push(app.controllers[className]);
-        angular.module('app.controllers').controller(controller, services);
-    }
-
-    /**
-     * Register new filter.
-     *
-     * @param className
-     * @param services
-     */
-    export function registerFilter (className: string, services = []) {
-        var filter = className.toLowerCase();
-        services.push(() => (new app.filters[className]()).filter);
-        angular.module('app.filters').filter(filter, services);
-    }
-
-    /**
-     * Register new directive.
-     *
-     * @param className
-     * @param services
-     */
-    export function registerDirective (className: string, services = []) {
-        var directive = className[0].toLowerCase() + className.slice(1);
-        services.push(() => new app.directives[className]());
-        angular.module('app.directives').directive(directive, services);
-    }
-
-    /**
-     * Register new service.
-     *
-     * @param className
-     * @param services
-     */
-    export function registerService (className: string, services = []) {
-        var service = className[0].toLowerCase() + className.slice(1);
-        services.push(() => new app.services[className]());
-        angular.module('app.services').factory(service, services);
-    }
-
 }

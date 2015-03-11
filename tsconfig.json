@@ -22,6 +22,7 @@
         "./scripts-src/messages.controller.ts",
         "./scripts-src/messages.factory.ts",
         "./scripts-src/user.service.ts",
+        "./scripts-src/username.filter.ts",
         "./typings/angularfire/angularfire.d.ts",
         "./typings/angularjs/angular-animate.d.ts",
         "./typings/angularjs/angular-route.d.ts",

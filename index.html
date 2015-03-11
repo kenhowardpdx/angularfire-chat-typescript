@@ -3,18 +3,28 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Loading...</title>
+    <title ng-bind="pageTitle">Loading...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="app.css" />
 </head>
-<body>
-    <div class="navbar navbar-default">
-        <div class="container">
-            <h1>Firebase Chat w/ Angular</h1>
-        </div>
-    </div>
-    <div class="container">
-        <div ng-view></div>
+<body layout="row">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools">Firebase Chat w/ Angular</h1>
+        </md-toolbar>
+        <md-content layout-fill role="main">
+            <md-subheader class="md-primary" ng-show="user">{{user.username}}</md-subheader>
+        </md-content>
+    </md-sidenav>
+    <div layout="column" layout-fill>
+        <md-toolbar layout="row">
+            <button class="menu-icon md-primary" hide-gt-sm aria-label="Toggle Menu">
+                <md-icon md-svg-icon="nav:ic_menu_24px"></md-icon>
+            </button>
+            <h1 class="md-toolbar-tools">{{pageTitle}}</h1>
+        </md-toolbar>
+        <md-content class="md-padding md-default-theme" md-scroll-y ng-view flex></md-content>
     </div>
 
     <script src="bower_components/angular/angular.js"></script>
@@ -27,10 +37,13 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/login.controller.js"></script>
+    <script src="scripts/logout.controller.js"></script>
     <script src="scripts/messages.controller.js"></script>
-    <script src="scripts/firebase.service.js"></script>
+    <script src="scripts/firebase.factory.js"></script>
     <script src="scripts/auth.factory.js"></script>
+    <script src="scripts/user.service.js"></script>
     <script src="scripts/messages.factory.js"></script>
+    <script src="scripts/username.filter.js"></script>
 
     </body>
 </html>
