@@ -16,10 +16,12 @@
     "files": [
         "./scripts-src/app.ts",
         "./scripts-src/auth.factory.ts",
-        "./scripts-src/firebase.service.ts",
+        "./scripts-src/firebase.factory.ts",
         "./scripts-src/login.controller.ts",
+        "./scripts-src/logout.controller.ts",
         "./scripts-src/messages.controller.ts",
         "./scripts-src/messages.factory.ts",
+        "./scripts-src/user.service.ts",
         "./typings/angularfire/angularfire.d.ts",
         "./typings/angularjs/angular-animate.d.ts",
         "./typings/angularjs/angular-route.d.ts",

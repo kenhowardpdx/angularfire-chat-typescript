@@ -20,4 +20,19 @@ interface AngularFireAuth {
 	$sendPasswordResetEmail(email: string): ng.IPromise<any>;
 	$authWithOAuthPopup(provider: string, options?: Object): ng.IPromise<any>;
 	$waitForAuth(): ng.IPromise<any>;
+	$getAuth(): ng.IPromise<any>;
+}
+
+// Angular Material Interfaces
+declare module ng.material {
+	/**
+	* Configures Angular Material Design Icons
+	*/
+	interface IMdIconProvider {
+		icon (id: string|number, url: string, iconSize: string): ng.IPromise<any>;
+		iconSet (id: string|number, url: string, iconSize: string): any;
+		defaultIconSet (url: string, iconSize: string|number): ng.IPromise<any>;
+		defaultIconSize (iconSize: string): any;
+		preloadIcons ($templateCache: ng.ITemplateCacheService): void;
+    }
 }
