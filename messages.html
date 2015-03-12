@@ -1,14 +1,25 @@
 <div class="messages">
-    <div class="row form-group" ng-repeat="row in vm.messages">
-        <div class="col-xs-3">{{row.userid | userNameFilter}}</div>
-        <div class="col-xs-9">{{row.message}}</div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <input type="text" ng-model="vm.message" class="form-control" placeholder="Message">
-        </div>
-        <div class="col-xs-3">
-            <button class="btn btn-info" ng-disabled="!vm.message" ng-click="vm.saveMessage(vm.message)">Send Message</button>
-        </div>
-    </div>
+    <md-list>
+        <md-item ng-repeat="item in vm.messages">
+            <md-item-content>
+                <div class="md-tile-left">
+                    <img src="https://polymer-tut.appspot.com/images/avatar-01.svg" class="face" alt="{{vm.getUsername(item.author)}}">
+                </div>
+                <div class="md-tile-content">
+                    <h4>{{vm.getUsername(item.author)}}</h4>
+                    <div>{{item.message}}</div>
+                </div>
+            </md-item-content>
+            <md-divider md-inset ng-if="!$last"></md-divider>
+        </md-item>
+    </md-list>
+    <section layout="row">
+        <md-input-container flex>
+          <label>Message</label>
+          <input ng-model="vm.message" type="text">
+        </md-input-container>
+        <md-button class="md-fab md-primary" aria-label="Send Message" ng-disabled="!vm.message" ng-click="vm.saveMessage(vm.message)">
+            <md-icon md-svg-icon="ic_check_circle_24px"></md-icon>
+        </md-button>
+    </section>
 </div>

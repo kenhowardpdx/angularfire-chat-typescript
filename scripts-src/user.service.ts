@@ -4,14 +4,12 @@ module app.services
     {
         public loggedUser = null;
 
-        provider:string;
         username:string;
         uid:string;
 
         userRef;
 
         public set = (profile) => {
-            this.provider = profile.provider;
             this.username = profile[profile.provider].username;
             this.uid = profile.uid;
             this.userRef = this.DB.child('users').child(profile.uid);
@@ -21,20 +19,16 @@ module app.services
         public setUser = (user) => {
             if(user.$value === null) {
                 // Create User
-                user.provider = this.provider;
                 user.username = this.username;
-                user.uid = this.uid;
                 user.$save();
             }
+            user.uid = this.uid;
             this.loggedUser = user;
             this.$rootScope['user'] = this.loggedUser;
         }
 
         public getUser = (uid) => {
-            this.userRef = this.DB.child('users').child(uid);
-            return this.$firebaseObject(this.userRef).$loaded(function (data) {
-                return data;
-            });
+            return this.$firebaseObject(this.DB.child('users').child(uid));
         }
 
         public logCurrentUserOut = () => {
